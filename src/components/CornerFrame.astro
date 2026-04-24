@@ -1,0 +1,91 @@
+---
+interface Props {
+  label?: string;
+  elevated?: boolean;
+}
+const { label, elevated = false } = Astro.props;
+---
+
+<div class:list={["frame", { elevated }]}>
+  {label && <span class="frame-label">{label}</span>}
+  <span class="bracket tl"></span>
+  <span class="bracket tr"></span>
+  <span class="bracket bl"></span>
+  <span class="bracket br"></span>
+  <div class="frame-inner">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .frame {
+    position: relative;
+    padding: 1.5rem 1.75rem;
+    background: var(--bg);
+    border: var(--line) solid var(--frame-color);
+    margin-bottom: 1.75rem;
+  }
+
+  .frame.elevated {
+    background: var(--bg-deep);
+  }
+
+  .frame.elevated .frame-label,
+  .frame.elevated .bracket {
+    background: var(--bg-deep);
+  }
+
+  .frame-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .frame-label {
+    position: absolute;
+    top: -0.65rem;
+    left: 1rem;
+    background: var(--bg);
+    padding: 0 0.6rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--frame-color);
+    z-index: 2;
+  }
+
+  .bracket {
+    position: absolute;
+    width: var(--bracket-size);
+    height: var(--bracket-size);
+    border: 0 solid var(--frame-color);
+    background: var(--bg);
+  }
+
+  .tl {
+    top: -3px;
+    left: -3px;
+    border-top-width: 3px;
+    border-left-width: 3px;
+  }
+
+  .tr {
+    top: -3px;
+    right: -3px;
+    border-top-width: 3px;
+    border-right-width: 3px;
+  }
+
+  .bl {
+    bottom: -3px;
+    left: -3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+  }
+
+  .br {
+    bottom: -3px;
+    right: -3px;
+    border-bottom-width: 3px;
+    border-right-width: 3px;
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import "../styles/global.css";
+import MenuNav from "../components/MenuNav.astro";
+import BootSequence from "../components/BootSequence.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Portfolio",
+  description = "Personal portfolio.",
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <BootSequence />
+    <MenuNav />
+    <main>
+      <slot />
+    </main>
+    <footer class="foot">
+      <div class="foot-inner">
+        <span>// END OF TRANSMISSION</span>
+        <span>{new Date().getFullYear()}</span>
+      </div>
+    </footer>
+
+    <style>
+      .foot {
+        border-top: var(--line) solid var(--ink);
+        background: var(--bg-deep);
+      }
+
+      .foot-inner {
+        max-width: var(--content-max);
+        margin: 0 auto;
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--ink-soft);
+      }
+    </style>
+  </body>
+</html>

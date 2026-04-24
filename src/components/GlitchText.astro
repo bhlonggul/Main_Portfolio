@@ -1,0 +1,52 @@
+---
+interface Props {
+  text: string;
+  as?: "h1" | "h2" | "h3" | "span";
+}
+
+const { text, as: Tag = "h1" } = Astro.props;
+---
+
+<Tag class="glitch" data-text={text}>{text}</Tag>
+
+<script>
+  const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?#@*+=";
+  const DURATION = 700;
+  const FRAME = 45;
+
+  document.querySelectorAll<HTMLElement>(".glitch").forEach((node) => {
+    const target = node.dataset.text ?? node.textContent ?? "";
+    if (!target) return;
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / DURATION, 1);
+      const settled = Math.floor(target.length * progress);
+      let out = "";
+      for (let i = 0; i < target.length; i++) {
+        if (i < settled || target[i] === " ") {
+          out += target[i];
+        } else {
+          out += CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+      }
+      node.textContent = out;
+      if (progress < 1) {
+        setTimeout(() => requestAnimationFrame(tick), FRAME);
+      } else {
+        node.textContent = target;
+      }
+    };
+
+    requestAnimationFrame(tick);
+  });
+</script>
+
+<style>
+  .glitch {
+    font-family: "VT323", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+</style>

@@ -1,0 +1,612 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CornerFrame from "../components/CornerFrame.astro";
+import GlitchText from "../components/GlitchText.astro";
+import { projects } from "../data/projects";
+
+const languages = [
+  { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg", tinted: true },
+  { name: "Python", icon: "https://cdn.simpleicons.org/python/454138" },
+  { name: "C++", icon: "https://cdn.simpleicons.org/cplusplus/454138" },
+  { name: "Assembly", icon: "https://cdn.simpleicons.org/assemblyscript/454138" },
+  { name: "HTML", icon: "https://cdn.simpleicons.org/html5/454138" },
+  { name: "CSS", icon: "https://cdn.simpleicons.org/css/454138" },
+  { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript/454138" },
+];
+
+const tools = [
+  { name: "Git", icon: "https://cdn.simpleicons.org/git/454138" },
+  { name: "GitHub", icon: "https://cdn.simpleicons.org/github/454138" },
+  { name: "Unity", icon: "https://cdn.simpleicons.org/unity/454138" },
+  { name: "Arduino", icon: "https://cdn.simpleicons.org/arduino/454138" },
+  { name: "Jupyter", icon: "https://cdn.simpleicons.org/jupyter/454138" },
+];
+
+const channels = [
+  {
+    label: "Email",
+    value: "bhlonggul@gmail.com",
+    href: "mailto:bhlonggul@gmail.com",
+  },
+  {
+    label: "GitHub",
+    value: "github.com/bhlonggul",
+    href: "https://github.com/bhlonggul",
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/brian-hlonggul",
+    href: "https://www.linkedin.com/in/brian-hlonggul-45222b356",
+  },
+];
+---
+
+<BaseLayout
+  title="Brian Hlonggul // Portfolio"
+  description="Brian Hlonggul — CS undergrad at Cal State Fullerton. Tools, algorithms, small games."
+>
+  <section id="home" class="hero">
+    <div class="hero-top">
+      <div class="hero-text">
+        <span class="label">Unit // 001</span>
+        <GlitchText text="Brian Hlonggul" as="h1" />
+        <p class="tagline">
+          CS undergrad at Cal State Fullerton. Building tools, visualizing
+          algorithms, and occasionally shipping small games.
+        </p>
+
+        <div class="social-bar">
+          <a
+            href="https://www.linkedin.com/in/brian-hlonggul-45222b356"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              ><path
+                d="M18.44,3.06H5.56a2.507,2.507,0,0,0-2.5,2.5V18.44a2.507,2.507,0,0,0,2.5,2.5H18.44a2.5,2.5,0,0,0,2.5-2.5V5.56A2.5,2.5,0,0,0,18.44,3.06Zm1.5,15.38a1.511,1.511,0,0,1-1.5,1.5H5.56a1.511,1.511,0,0,1-1.5-1.5V5.56a1.511,1.511,0,0,1,1.5-1.5H18.44a1.511,1.511,0,0,1,1.5,1.5ZM7.376,10.748a1,1,0,1,1,2,0v6.5a1,1,0,0,1-2,0ZM7.376,6.744a1,1,0,1,1,1,1A1,1,0,0,1,7.376,6.744ZM17.124,13.5v3.748a1,1,0,0,1-2,0V13.5a1.5,1.5,0,0,0-3,0v3.748a1,1,0,0,1-2,0V10.748a1,1,0,0,1,2,0v.316A3.384,3.384,0,0,1,14.124,10,3.5,3.5,0,0,1,17.124,13.5Z"
+              ></path></svg
+            >
+            LinkedIn
+          </a>
+          <span class="social-sep">|</span>
+          <a
+            href="https://github.com/bhlonggul"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              ><path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              ></path></svg
+            >
+            GitHub
+          </a>
+          <span class="social-sep">|</span>
+          <a href="#about" class="more-link">More about me →</a>
+        </div>
+      </div>
+
+      <div class="photo-frame">
+        <span class="frame-label">Unit // IMG</span>
+        <span class="bracket tl"></span>
+        <span class="bracket tr"></span>
+        <span class="bracket bl"></span>
+        <span class="bracket br"></span>
+        <div class="photo-box">
+          <img src="/brian.jpg" alt="Brian Hlonggul" />
+          <div class="photo-scan"></div>
+        </div>
+      </div>
+    </div>
+
+    <CornerFrame label="Status" elevated>
+      <p>
+        <span class="online-dot"></span><strong>Online</strong> — open to
+        internships, collaboration, and conversations about anything that
+        compiles.
+      </p>
+      <p class="mb-0">
+        Browse <a href="#projects">recent projects</a> or
+        <a href="#contact">open a channel</a>.
+      </p>
+    </CornerFrame>
+
+    <CornerFrame label="Recent Activity">
+      <ul class="log">
+        <li><span class="ts">[2025.09]</span> Shipped Algorithm Visualizer (Pygame, 9 sorting algos)</li>
+        <li><span class="ts">[2025.08]</span> Started CS at Cal State Fullerton</li>
+        <li><span class="ts">[2025.05]</span> Data science research at CIC|PCUBED, CSUF</li>
+      </ul>
+    </CornerFrame>
+  </section>
+
+  <section id="about" class="section">
+    <span class="label">File // About</span>
+    <h2>Identification</h2>
+
+    <CornerFrame label="Bio">
+      <p>
+        Hi — I'm <strong>Brian</strong>. I'm a Computer Science undergrad at
+        <strong>Cal State Fullerton</strong>, transferred in from Mt. San
+        Antonio College. I write mostly Python, Java, and C++, and lately I've
+        been spending more time on visualizers, small games, and anything that
+        lets me see an algorithm move.
+      </p>
+      <p>
+        In summer 2025 I worked as a student data science researcher at
+        <strong>CIC|PCUBED</strong>, looking at correlations between digital
+        behavior and mental health using Pandas and NumPy. Off the keyboard
+        I'm an officer for <strong>ACM Node Buds</strong> at CSUF, helping
+        organize workshops and mentorship for other CS students.
+      </p>
+      <p class="mb-0">
+        If something here looks interesting, I'd love to hear from you.
+      </p>
+    </CornerFrame>
+
+    <CornerFrame label="Capabilities">
+      <div class="skill-groups">
+        <div class="skill-group">
+          <div class="skill-group-label">Languages</div>
+          <div class="skill-icons">
+            {languages.map((s) => (
+              <div class="skill-icon">
+                <img src={s.icon} alt={s.name} class={s.tinted ? "ink-tinted" : ""} />
+                <span>{s.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Tools &amp; Frameworks</div>
+          <div class="skill-icons">
+            {tools.map((s) => (
+              <div class="skill-icon">
+                <img src={s.icon} alt={s.name} />
+                <span>{s.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </CornerFrame>
+  </section>
+
+  <section id="projects" class="section">
+    <span class="label">Archive // Projects</span>
+    <h2>Projects</h2>
+
+    <div class="grid">
+      {projects.map((p) => (
+        <CornerFrame label={p.title}>
+          <div class="project-img">
+            <img src={p.image} alt={p.title} />
+            <div class="project-img-scan"></div>
+          </div>
+          <h3>{p.title}</h3>
+          <p>{p.summary}</p>
+          <div class="tags">
+            {p.tags.map((t) => <span class="tag">{t}</span>)}
+          </div>
+          {p.href && (
+            <p class="open">
+              <a href={p.href} target="_blank" rel="noopener noreferrer">
+                Open ▸
+              </a>
+            </p>
+          )}
+        </CornerFrame>
+      ))}
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <span class="label">Channel // Contact</span>
+    <h2>Open Channel</h2>
+
+    <CornerFrame label="Established Links">
+      <dl class="channels">
+        {channels.map((c) => {
+          const external = c.href.startsWith("http");
+          return (
+            <div class="row">
+              <dt>{c.label}</dt>
+              <dd>
+                <a
+                  href={c.href}
+                  {...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  {c.value}
+                </a>
+              </dd>
+            </div>
+          );
+        })}
+      </dl>
+      <div class="contact-terminal">
+        <p>&gt; channel status: <span class="online-dot"></span><strong>open</strong></p>
+        <p>&gt; preferred: email<span class="blink">_</span></p>
+        <p>&gt; response time: varies // in school</p>
+      </div>
+    </CornerFrame>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    margin-bottom: 4rem;
+  }
+
+  .hero-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 2rem;
+  }
+
+  .hero-text {
+    min-width: 0;
+  }
+
+  .tagline {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 38rem;
+    margin-bottom: 0;
+  }
+
+  .photo-frame {
+    position: relative;
+    width: 140px;
+    flex-shrink: 0;
+  }
+
+  .photo-frame .frame-label {
+    position: absolute;
+    top: -0.65rem;
+    left: 1rem;
+    background: var(--bg);
+    padding: 0 0.5rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--frame-color);
+    font-family: "Share Tech Mono", monospace;
+    z-index: 2;
+  }
+
+  .photo-frame .bracket {
+    position: absolute;
+    width: var(--bracket-size);
+    height: var(--bracket-size);
+    border: 0 solid var(--frame-color);
+    background: var(--bg);
+  }
+  .photo-frame .tl { top: -3px; left: -3px; border-top-width: 3px; border-left-width: 3px; }
+  .photo-frame .tr { top: -3px; right: -3px; border-top-width: 3px; border-right-width: 3px; }
+  .photo-frame .bl { bottom: -3px; left: -3px; border-bottom-width: 3px; border-left-width: 3px; }
+  .photo-frame .br { bottom: -3px; right: -3px; border-bottom-width: 3px; border-right-width: 3px; }
+
+  .photo-box {
+    border: var(--line) solid var(--frame-color);
+    width: 140px;
+    height: 160px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-deep);
+    position: relative;
+  }
+
+  .photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    filter: sepia(0.2) contrast(1.05);
+  }
+
+  .photo-scan {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(69, 65, 56, 0.05) 3px,
+      rgba(69, 65, 56, 0.05) 4px
+    );
+    pointer-events: none;
+  }
+
+  .social-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 1rem;
+    margin: 1rem 0 2rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .social-bar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-bottom: none;
+    color: var(--ink-soft);
+    transition: color 120ms;
+  }
+
+  .social-bar a:hover {
+    color: var(--ink);
+    background: none;
+  }
+
+  .social-bar a svg {
+    flex-shrink: 0;
+  }
+
+  .social-sep {
+    color: var(--ink-soft);
+    opacity: 0.5;
+    user-select: none;
+  }
+
+  .social-bar .more-link {
+    color: var(--ink);
+    border-bottom: var(--line) solid var(--ink);
+    padding-bottom: 0;
+  }
+
+  .social-bar .more-link:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .online-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-right: 0.4rem;
+    vertical-align: middle;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .mb-0 {
+    margin-bottom: 0;
+  }
+
+  .log {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .log li {
+    padding: 0.4rem 0;
+    border-bottom: var(--line) dashed var(--ink-soft);
+    display: flex;
+    gap: 0.9rem;
+  }
+
+  .log li:last-child {
+    border-bottom: none;
+  }
+
+  .ts {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    min-width: 5.5rem;
+  }
+
+  .skill-groups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+    align-items: flex-start;
+  }
+
+  .skill-group-label {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    border-bottom: var(--line) dashed var(--ink-soft);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .skill-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    border: var(--line) solid var(--ink);
+    padding: 0.6rem 0.75rem;
+    min-width: 72px;
+    transition: background 120ms, color 120ms;
+    cursor: default;
+  }
+
+  .skill-icon:hover {
+    background: var(--ink);
+  }
+
+  .skill-icon:hover img {
+    filter: invert(1) brightness(1.8);
+  }
+
+  .skill-icon img {
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+
+  .skill-icon img.ink-tinted {
+    filter: brightness(0) sepia(1) hue-rotate(10deg) saturate(0.4) brightness(0.45);
+  }
+
+  .skill-icon:hover img.ink-tinted {
+    filter: brightness(0) invert(1) opacity(0.85);
+  }
+
+  .skill-icon span {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 600px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .grid h3 {
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border: var(--line) solid var(--ink-soft);
+    padding: 0.1rem 0.4rem;
+  }
+
+  .open {
+    margin: 0.5rem 0 0;
+  }
+
+  .project-img {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    border: var(--line) solid var(--ink-soft);
+    position: relative;
+    background: var(--bg-deep);
+  }
+
+  .project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    filter: sepia(0.15) contrast(1.05);
+  }
+
+  .project-img-scan {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(69, 65, 56, 0.06) 2px,
+      rgba(69, 65, 56, 0.06) 3px
+    );
+  }
+
+  .channels {
+    margin: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  dt {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  .contact-terminal {
+    border-top: var(--line) dashed var(--ink-soft);
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  .contact-terminal p {
+    margin: 0;
+  }
+
+  .blink {
+    display: inline-block;
+    animation: blink 1.1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @media (max-width: 520px) {
+    .hero-top {
+      grid-template-columns: 1fr;
+    }
+    .photo-frame {
+      width: 100%;
+    }
+    .photo-box {
+      width: 100%;
+      height: 180px;
+    }
+  }
+</style>

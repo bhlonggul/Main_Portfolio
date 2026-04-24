@@ -1,0 +1,163 @@
+---
+// First-visit-per-session boot overlay. Sits on top of everything until done.
+---
+
+<div id="boot" aria-hidden="true">
+  <div class="boot-stack">
+    <div class="line big" id="boot-title" data-text="BHLONGGUL OS">BHLONGGUL OS</div>
+    <div class="line">> SYSTEM INITIALIZING<span class="dots"></span></div>
+    <div class="line dim">> CHECKSUM ... <span class="ok">OK</span></div>
+    <div class="line dim">> MEMORY ALLOC ... <span class="ok">OK</span></div>
+    <div class="line dim">> PERSONALITY DATA ... <span class="ok">OK</span></div>
+    <div class="line">> WELCOME, OPERATOR.</div>
+  </div>
+</div>
+
+<script>
+  const KEY = "boot:v2:played";
+  const el = document.getElementById("boot");
+  if (!el) {
+    /* nothing */
+  } else if (sessionStorage.getItem(KEY)) {
+    el.remove();
+  } else {
+    sessionStorage.setItem(KEY, "1");
+    document.body.classList.add("boot-locked");
+
+    const title = document.getElementById("boot-title");
+    if (title) {
+      const target = title.dataset.text ?? title.textContent ?? "";
+      const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?#@*+=";
+      const DURATION = 1400;
+      const FRAME = 55;
+      const start = performance.now();
+
+      const tick = (now: number) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / DURATION, 1);
+        const settled = Math.floor(target.length * progress);
+        let out = "";
+        for (let i = 0; i < target.length; i++) {
+          if (i < settled || target[i] === " ") {
+            out += target[i];
+          } else {
+            out += CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+        }
+        title.textContent = out;
+        if (progress < 1) {
+          setTimeout(() => requestAnimationFrame(tick), FRAME);
+        } else {
+          title.textContent = target;
+        }
+      };
+      requestAnimationFrame(tick);
+    }
+
+    setTimeout(() => el.classList.add("fade"), 3800);
+    setTimeout(() => {
+      el.remove();
+      document.body.classList.remove("boot-locked");
+    }, 4600);
+  }
+</script>
+
+<style is:global>
+  body.boot-locked {
+    overflow: hidden;
+  }
+</style>
+
+<style>
+  #boot {
+    position: fixed;
+    inset: 0;
+    background: var(--ink);
+    color: var(--bg);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 600ms ease-out;
+  }
+
+  #boot.fade {
+    opacity: 0;
+  }
+
+  .boot-stack {
+    font-family: "Share Tech Mono", monospace;
+    line-height: 1.7;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 1rem 1.5rem;
+  }
+
+  .line {
+    opacity: 0;
+    animation: appear 180ms forwards;
+  }
+
+  .line:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .line:nth-child(2) {
+    animation-delay: 1300ms;
+  }
+  .line:nth-child(3) {
+    animation-delay: 1800ms;
+  }
+  .line:nth-child(4) {
+    animation-delay: 2300ms;
+  }
+  .line:nth-child(5) {
+    animation-delay: 2800ms;
+  }
+  .line:nth-child(6) {
+    animation-delay: 3400ms;
+  }
+
+  .big {
+    font-family: "VT323", monospace;
+    font-size: 2.6rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.14em;
+  }
+
+  .dim {
+    color: rgba(196, 185, 152, 0.7);
+  }
+
+  .ok {
+    color: var(--accent);
+  }
+
+  .dots::after {
+    content: "";
+    display: inline-block;
+    width: 1.2em;
+    text-align: left;
+    animation: dots 700ms steps(4, end) infinite;
+  }
+
+  @keyframes appear {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes dots {
+    0% {
+      content: "";
+    }
+    25% {
+      content: ".";
+    }
+    50% {
+      content: "..";
+    }
+    75% {
+      content: "...";
+    }
+  }
+</style>

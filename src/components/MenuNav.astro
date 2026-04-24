@@ -1,0 +1,138 @@
+---
+const items = [
+  { href: "#home", label: "Home", id: "home" },
+  { href: "#about", label: "About", id: "about" },
+  { href: "#projects", label: "Projects", id: "projects" },
+  { href: "#contact", label: "Contact", id: "contact" },
+];
+---
+
+<header class="bar">
+  <div class="bar-inner">
+    <a class="brand" href="#home">BHLONGGUL // SYS</a>
+    <nav>
+      <ul>
+        {items.map((item) => (
+          <li>
+            <a href={item.href} data-section={item.id} class="item">
+              <span class="marker">▸</span>{item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>(
+    ".item[data-section]",
+  );
+
+  const setActive = (id: string) => {
+    links.forEach((l) =>
+      l.classList.toggle("active", l.dataset.section === id),
+    );
+  };
+
+  const sections = Array.from(links)
+    .map((l) => l.dataset.section)
+    .filter((id): id is string => Boolean(id))
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (sections.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort(
+            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
+          );
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
+    );
+
+    sections.forEach((el) => observer.observe(el));
+  }
+</script>
+
+<style>
+  .bar {
+    background: var(--ink);
+    color: var(--bg);
+    border-bottom: var(--line) solid var(--ink);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .bar-inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .brand {
+    font-family: "VT323", monospace;
+    font-size: 1.4rem;
+    color: var(--bg);
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .brand:hover {
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .item {
+    color: var(--bg);
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .marker {
+    opacity: 0;
+    transition: opacity 100ms linear;
+    font-size: 0.7rem;
+  }
+
+  .item:hover .marker,
+  .item:focus-visible .marker,
+  .item.active .marker {
+    opacity: 1;
+  }
+
+  .item:hover,
+  .item:focus-visible {
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .item.active {
+    background: var(--bg);
+    color: var(--ink);
+  }
+</style>

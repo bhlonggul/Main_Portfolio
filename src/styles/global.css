@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap");
+
+:root {
+  --bg: #c4b998;
+  --bg-deep: #b3a684;
+  --ink: #454138;
+  --ink-soft: #6a6453;
+  --accent: #ffffff;
+  --green: #7a9e6e;
+  --line: 1px;
+  --frame-color: #454138;
+  --bracket-size: 14px;
+  --content-max: 880px;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(69, 65, 56, 0.035) 2px,
+    rgba(69, 65, 56, 0.035) 4px
+  );
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Share Tech Mono", ui-monospace, Menlo, Consolas, monospace;
+  font-size: 16px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  min-height: 100vh;
+}
+
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: var(--line) solid var(--ink);
+  transition: background 120ms linear, color 120ms linear;
+}
+
+a:hover,
+a:focus-visible {
+  background: var(--ink);
+  color: var(--bg);
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "VT323", "Share Tech Mono", monospace;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 1rem;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1;
+}
+
+h2 {
+  font-size: 1.8rem;
+  border-bottom: var(--line) solid var(--ink);
+  padding-bottom: 0.4rem;
+  margin-top: 2rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+ul {
+  padding-left: 1.2rem;
+  margin: 0 0 1rem;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
