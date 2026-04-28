@@ -36,8 +36,8 @@ Pure visual identity. Pick the ones that excite you most; none are mandatory. **
 
 The biggest lift. Turns the site from a portfolio *page* into a portfolio *project*.
 
-- [ ] **3.1 Project detail pages** — migrate `src/data/projects.ts` to Astro content collection (`src/content/projects/<slug>.md`); create `src/pages/projects/[slug].astro`; case studies (problem → approach → tech → outcome)
-- [ ] **3.2 Astro Image optimization** — replace `<img>` with `<Image>` for project thumbs; move images to `src/assets/`
+- [x] **3.1 Project detail pages** — migrated to Astro content collection at `src/content/projects/<slug>.md` with typed schema in `src/content.config.ts`; dynamic route at `src/pages/projects/[slug].astro` renders glitch title, hero image w/ scanlines, four-section markdown body (Problem / Approach / Tech / Outcome), and a Links frame (Source / Live demo / Back to Archive); home cards now overlay-link to the case study while keeping the external Source link clickable on top; MenuNav anchors made absolute (`/#section`) so detail pages can navigate back to home sections; `summer-research-2025.md` left as a stub for Brian to fill in
+- [x] **3.2 Astro Image optimization** — moved `brian.jpg` + 4 project thumbnails from `public/` to `src/assets/` (`brian.jpg` and `assets/projects/`); `content.config.ts` schema now uses the `image()` helper for build-time validation; `<img>` tags swapped for `<Image>` from `astro:assets` on home portrait, home project thumbs, and detail-page heroes; per-use widths (320 / 640 / 1280) generate two webp variants per image, with explicit `width`/`height` attributes preventing CLS; massive size wins (`brian.jpg`: 1633kB → 7kB; `travelbookers.png`: 761kB → 16–44kB; PNGs across the board ~75–98% smaller); `og-image.png`, favicon, cursors, and resume PDF stay in `public/` since they need stable absolute URLs
 - [ ] **3.3 Real contact form** — Formspree or Vercel Forms; terminal-prompt styling; honeypot for spam; success page
 
 ---

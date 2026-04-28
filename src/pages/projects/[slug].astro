@@ -1,0 +1,237 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CornerFrame from "../../components/CornerFrame.astro";
+import GlitchText from "../../components/GlitchText.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({
+    params: { slug: p.id },
+    props: { project: p },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, summary, tags, image, repo, demo } = project.data;
+---
+
+<BaseLayout
+  title={`${title} // Brian Hlonggul`}
+  description={summary}
+>
+  <article class="case-study">
+    <header class="case-head">
+      <span class="label">Archive // Case Study</span>
+      <GlitchText text={title} as="h1" />
+      <p class="summary">{summary}</p>
+      <div class="tags">
+        {tags.map((t) => <span class="tag">{t}</span>)}
+      </div>
+    </header>
+
+    <div class="hero">
+      <Image src={image} alt={title} width={1280} loading="eager" />
+      <div class="hero-scan"></div>
+    </div>
+
+    <div class="body">
+      <Content />
+    </div>
+
+    <CornerFrame label="Links" elevated>
+      <div class="links-row">
+        <a class="cta" href={repo} target="_blank" rel="noopener noreferrer">
+          [ Source ▸ ]
+        </a>
+        {demo && (
+          <a class="cta" href={demo} target="_blank" rel="noopener noreferrer">
+            [ Live demo ▸ ]
+          </a>
+        )}
+      </div>
+      <p class="back mb-0">
+        <a href="/#projects">◂ Back to Archive</a>
+      </p>
+    </CornerFrame>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study {
+    margin-bottom: 4rem;
+  }
+
+  .case-head {
+    margin-bottom: 1.5rem;
+  }
+
+  .case-head h1 {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .summary {
+    color: var(--ink-soft);
+    font-style: italic;
+    max-width: 42rem;
+    margin: 0 0 0.9rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border: var(--line) solid var(--ink-soft);
+    padding: 0.1rem 0.4rem;
+  }
+
+  .hero {
+    width: 100%;
+    height: 360px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: var(--line) solid var(--frame-color);
+    position: relative;
+    background: var(--bg-deep);
+  }
+
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    filter: sepia(0.15) contrast(1.05);
+  }
+
+  .hero-scan {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(69, 65, 56, 0.06) 3px,
+      rgba(69, 65, 56, 0.06) 4px
+    );
+  }
+
+  .body {
+    margin-bottom: 2rem;
+  }
+
+  .body :global(h2) {
+    font-family: "VT323", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 1.45rem;
+    color: var(--ink);
+    margin: 2rem 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: var(--line) dashed var(--ink-soft);
+  }
+
+  .body :global(h2)::before {
+    content: "// ";
+    color: var(--ink-soft);
+  }
+
+  .body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .body :global(p) {
+    margin: 0 0 1rem;
+  }
+
+  .body :global(ul) {
+    margin: 0 0 1rem;
+    padding-left: 1.4rem;
+  }
+
+  .body :global(li) {
+    margin-bottom: 0.35rem;
+  }
+
+  .body :global(strong) {
+    color: var(--ink);
+  }
+
+  .body :global(em) {
+    color: var(--ink-soft);
+  }
+
+  .body :global(code) {
+    font-family: "Share Tech Mono", monospace;
+    background: var(--bg-deep);
+    padding: 0.05rem 0.3rem;
+    font-size: 0.92em;
+  }
+
+  .links-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta {
+    display: inline-block;
+    border: var(--line) solid var(--ink);
+    padding: 0.45rem 0.9rem;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink);
+    transition: background 120ms linear, color 120ms linear, letter-spacing 120ms linear;
+  }
+
+  .cta:hover,
+  .cta:focus-visible {
+    background: var(--ink);
+    color: var(--bg);
+    letter-spacing: 0.2em;
+  }
+
+  .back {
+    border-top: var(--line) dashed var(--ink-soft);
+    padding-top: 0.8rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .back a {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-soft);
+    border-bottom: none;
+  }
+
+  .back a:hover {
+    color: var(--ink);
+    background: none;
+  }
+
+  .mb-0 {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      height: 220px;
+    }
+  }
+</style>

@@ -1,8 +1,17 @@
 ---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CornerFrame from "../components/CornerFrame.astro";
 import GlitchText from "../components/GlitchText.astro";
-import { projects } from "../data/projects";
+import brianPhoto from "../assets/brian.jpg";
+
+const projects = (await getCollection("projects")).sort((a, b) => {
+  const ao = a.data.order ?? 999;
+  const bo = b.data.order ?? 999;
+  if (ao !== bo) return ao - bo;
+  return b.data.date.getTime() - a.data.date.getTime();
+});
 
 const languages = [
   { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg", tinted: true },
@@ -93,7 +102,7 @@ const channels = [
         <span class="bracket bl"></span>
         <span class="bracket br"></span>
         <div class="photo-box">
-          <img src="/brian.jpg" alt="Brian Hlonggul" />
+          <Image src={brianPhoto} alt="Brian Hlonggul" width={320} loading="eager" />
           <div class="photo-scan"></div>
         </div>
       </div>
@@ -195,23 +204,30 @@ const channels = [
 
     <div class="grid" data-stagger>
       {projects.map((p) => (
-        <CornerFrame label={p.title}>
+        <CornerFrame label={p.data.title}>
           <div class="project-img">
-            <img src={p.image} alt={p.title} />
+            <Image src={p.data.image} alt={p.data.title} width={640} loading="lazy" />
             <div class="project-img-scan"></div>
           </div>
-          <h3>{p.title}</h3>
-          <p>{p.summary}</p>
+          <h3>
+            <a class="card-link" href={`/projects/${p.id}`}>
+              <span class="sr-only">Read case study: </span>{p.data.title}
+            </a>
+          </h3>
+          <p>{p.data.summary}</p>
           <div class="tags">
-            {p.tags.map((t) => <span class="tag">{t}</span>)}
+            {p.data.tags.map((t) => <span class="tag">{t}</span>)}
           </div>
-          {p.href && (
-            <p class="open">
-              <a href={p.href} target="_blank" rel="noopener noreferrer">
-                Open ▸
-              </a>
-            </p>
-          )}
+          <p class="open">
+            <a
+              class="repo-link"
+              href={p.data.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Source ▸
+            </a>
+          </p>
         </CornerFrame>
       ))}
     </div>
@@ -549,6 +565,44 @@ const channels = [
     margin-bottom: 0.4rem;
   }
 
+  .card-link {
+    color: var(--ink);
+    border-bottom: none;
+    transition: color 120ms linear;
+  }
+
+  .card-link:hover,
+  .card-link:focus-visible {
+    color: var(--ink);
+    background: none;
+  }
+
+  .card-link::after {
+    content: "";
+    position: absolute;
+    inset: -1.5rem -1.75rem;
+    z-index: 1;
+  }
+
+  .grid :global(.frame):hover .card-link,
+  .grid :global(.frame):focus-within .card-link {
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 4px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .tags {
     display: flex;
     flex-wrap: wrap;
@@ -567,6 +621,11 @@ const channels = [
 
   .open {
     margin: 0.5rem 0 0;
+  }
+
+  .repo-link {
+    position: relative;
+    z-index: 2;
   }
 
   .project-img {
