@@ -48,7 +48,11 @@ try {
   const raw = (await res.json()) as RawGhEvent[];
 
   const mapped: FeedEntry[] = raw
-    .filter((e) => ALLOWED_TYPES.includes(e.type))
+    .filter(
+      (e) =>
+        ALLOWED_TYPES.includes(e.type) &&
+        e.repo.name !== "bhlonggul/Main_Portfolio",
+    )
     .map((e) => {
       const date = e.created_at.slice(0, 10).replaceAll("-", ".");
       const repoFull = e.repo.name;
@@ -121,7 +125,7 @@ try {
     }
   }
 
-  feed = deduped.slice(0, 6);
+  feed = deduped.slice(0, 4);
 } catch {
   feedError = true;
 }
@@ -231,14 +235,6 @@ const channels = [
         Browse <a href="#projects">recent projects</a> or
         <a href="#contact">open a channel</a>.
       </p>
-    </CornerFrame>
-
-    <CornerFrame label="Recent Activity">
-      <ul class="log" data-stagger>
-        <li><span class="ts">[2025.09]</span> Shipped Algorithm Visualizer (Pygame, 9 sorting algos)</li>
-        <li><span class="ts">[2025.08]</span> Started CS at Cal State Fullerton</li>
-        <li><span class="ts">[2025.05]</span> Data science research at CIC|PCUBED, CSUF</li>
-      </ul>
     </CornerFrame>
 
     <CornerFrame label="Live Feed">

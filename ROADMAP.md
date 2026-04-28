@@ -38,7 +38,7 @@ The biggest lift. Turns the site from a portfolio *page* into a portfolio *proje
 
 - [x] **3.1 Project detail pages** — migrated to Astro content collection at `src/content/projects/<slug>.md` with typed schema in `src/content.config.ts`; dynamic route at `src/pages/projects/[slug].astro` renders glitch title, hero image w/ scanlines, four-section markdown body (Problem / Approach / Tech / Outcome), and a Links frame (Source / Live demo / Back to Archive); home cards now overlay-link to the case study while keeping the external Source link clickable on top; MenuNav anchors made absolute (`/#section`) so detail pages can navigate back to home sections; `summer-research-2025.md` left as a stub for Brian to fill in
 - [x] **3.2 Astro Image optimization** — moved `brian.jpg` + 4 project thumbnails from `public/` to `src/assets/` (`brian.jpg` and `assets/projects/`); `content.config.ts` schema now uses the `image()` helper for build-time validation; `<img>` tags swapped for `<Image>` from `astro:assets` on home portrait, home project thumbs, and detail-page heroes; per-use widths (320 / 640 / 1280) generate two webp variants per image, with explicit `width`/`height` attributes preventing CLS; massive size wins (`brian.jpg`: 1633kB → 7kB; `travelbookers.png`: 761kB → 16–44kB; PNGs across the board ~75–98% smaller); `og-image.png`, favicon, cursors, and resume PDF stay in `public/` since they need stable absolute URLs
-- [ ] **3.3 Real contact form** — Formspree or Vercel Forms; terminal-prompt styling; honeypot for spam; success page
+- [-] **3.3 Real contact form** — *skipped: prefer the existing mailto link; built once and reverted*
 
 ---
 
@@ -46,10 +46,11 @@ The biggest lift. Turns the site from a portfolio *page* into a portfolio *proje
 
 Each is a small standalone feature. Add when you have content for it.
 
-- [ ] **4.1 `/now` page** — what you're currently learning/building/playing
+- [-] **4.1 `/now` page** — *skipped: would go stale without active maintenance*
 - [x] **4.2 GitHub activity panel** — build-time fetch of `https://api.github.com/users/bhlonggul/events/public` from `index.astro` frontmatter; filter to PushEvent / CreateEvent / PullRequestEvent (drops Watch/IssueComment/etc. noise); collapse consecutive PushEvents to the same repo+branch into a single line with summed +N count; render the top 6 entries as a NieR-style log (`[YYYY.MM.DD] TYPE ▸ repo // detail`) inside a new `Live Feed` `CornerFrame` in the hero, immediately below `Recent Activity`; repo name links to the repo on GitHub; small `> source: github.com/bhlonggul` caption at the top of the frame; graceful empty/error fallback (`> feed unavailable` or `> no recent public activity`) so the layout doesn't shift if the API request fails at build time; PushEvent detail uses the branch name (with optional `+N` commit count when GitHub provides it — merge-pushes from PRs no longer return `commits`/`size`)
+  - *Update:* removed the curated `Recent Activity` frame from the hero — visually redundant with the Live Feed, and its content (CSUF, research, Algorithm Visualizer) was already implicit in the bio + projects grid; tightened Live Feed to top **4** entries and added a self-noise filter that drops events from `bhlonggul/Main_Portfolio` (visitors are already on it)
 - [ ] **4.3 Skills loadout re-skin** — restyle skills grid as YoRHa unit equipment screen
-- [ ] **4.4 Devlog / blog** — second content collection at `src/content/posts/`; route at `src/pages/blog/[slug].astro`
+- [-] **4.4 Devlog / blog** — *skipped*
 
 ---
 
