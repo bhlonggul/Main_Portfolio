@@ -144,6 +144,23 @@ const channels = [
       </p>
     </CornerFrame>
 
+    <CornerFrame label="Resume" elevated>
+      <p class="resume-intro">
+        Credentials, coursework, and work history — opens in a new tab.
+      </p>
+      <a
+        class="resume-btn"
+        href="/Brian_Hlonggul_Resume.pdf"
+        target="_blank"
+        rel="noopener"
+      >
+        [ View Resume ▸ ]
+      </a>
+      <p class="resume-meta mb-0">
+        &gt; file: brian_hlonggul_resume.pdf // format: pdf
+      </p>
+    </CornerFrame>
+
     <CornerFrame label="Capabilities">
       <div class="skill-groups">
         <div class="skill-group">
@@ -476,6 +493,39 @@ const channels = [
     letter-spacing: 0.1em;
     color: var(--ink-soft);
     white-space: nowrap;
+  }
+
+  .resume-intro {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-bottom: 1rem;
+  }
+
+  .resume-btn {
+    display: inline-block;
+    border: var(--line) solid var(--ink);
+    border-bottom: var(--line) solid var(--ink);
+    padding: 0.55rem 1rem;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    margin-bottom: 0.9rem;
+    transition: background 120ms linear, color 120ms linear, letter-spacing 120ms linear;
+  }
+
+  .resume-btn:hover,
+  .resume-btn:focus-visible {
+    background: var(--ink);
+    color: var(--bg);
+    letter-spacing: 0.22em;
+  }
+
+  .resume-meta {
+    color: var(--ink-soft);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
   }
 
   .section {

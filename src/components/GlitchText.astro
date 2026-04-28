@@ -13,10 +13,17 @@ const { text, as: Tag = "h1" } = Astro.props;
   const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?#@*+=";
   const DURATION = 700;
   const FRAME = 45;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   document.querySelectorAll<HTMLElement>(".glitch").forEach((node) => {
     const target = node.dataset.text ?? node.textContent ?? "";
     if (!target) return;
+    if (prefersReducedMotion) {
+      node.textContent = target;
+      return;
+    }
     const start = performance.now();
 
     const tick = (now: number) => {
