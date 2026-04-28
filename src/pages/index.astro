@@ -13,6 +13,119 @@ const projects = (await getCollection("projects")).sort((a, b) => {
   return b.data.date.getTime() - a.data.date.getTime();
 });
 
+interface RawGhEvent {
+  type: string;
+  created_at: string;
+  repo: { name: string };
+  payload: {
+    commits?: { message: string; sha: string }[];
+    size?: number;
+    ref_type?: string;
+    ref?: string;
+    action?: string;
+  };
+}
+
+interface FeedEntry {
+  date: string;
+  type: "PUSH" | "CREATE" | "PR";
+  repoFull: string;
+  repoShort: string;
+  detail: string;
+  href: string;
+}
+
+const ALLOWED_TYPES = ["PushEvent", "CreateEvent", "PullRequestEvent"];
+let feed: FeedEntry[] = [];
+let feedError = false;
+
+try {
+  const res = await fetch(
+    "https://api.github.com/users/bhlonggul/events/public",
+    { headers: { Accept: "application/vnd.github+json" } }
+  );
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const raw = (await res.json()) as RawGhEvent[];
+
+  const mapped: FeedEntry[] = raw
+    .filter((e) => ALLOWED_TYPES.includes(e.type))
+    .map((e) => {
+      const date = e.created_at.slice(0, 10).replaceAll("-", ".");
+      const repoFull = e.repo.name;
+      const repoShort = repoFull.split("/").pop() ?? repoFull;
+      const href = `https://github.com/${repoFull}`;
+      if (e.type === "PushEvent") {
+        const branch = (e.payload?.ref ?? "").replace(/^refs\/heads\//, "");
+        const count =
+          e.payload?.size ?? e.payload?.commits?.length ?? 0;
+        const detail =
+          count > 0
+            ? `${branch || "push"} +${count}`
+            : branch || "push";
+        return {
+          date,
+          type: "PUSH" as const,
+          repoFull,
+          repoShort,
+          detail,
+          href,
+        };
+      }
+      if (e.type === "CreateEvent") {
+        const refType = e.payload?.ref_type ?? "ref";
+        const ref = e.payload?.ref;
+        const detail =
+          refType === "repository"
+            ? "repo"
+            : ref
+              ? `${refType}: ${ref}`
+              : refType;
+        return {
+          date,
+          type: "CREATE" as const,
+          repoFull,
+          repoShort,
+          detail,
+          href,
+        };
+      }
+      const action = e.payload?.action ?? "updated";
+      return {
+        date,
+        type: "PR" as const,
+        repoFull,
+        repoShort,
+        detail: action,
+        href,
+      };
+    });
+
+  const deduped: FeedEntry[] = [];
+  const branchOf = (detail: string) => detail.split(" +")[0];
+  const countOf = (detail: string) =>
+    parseInt(/\+(\d+)/.exec(detail)?.[1] ?? "0", 10);
+  for (const entry of mapped) {
+    const last = deduped[deduped.length - 1];
+    if (
+      last &&
+      entry.type === "PUSH" &&
+      last.type === "PUSH" &&
+      entry.repoFull === last.repoFull &&
+      branchOf(last.detail) === branchOf(entry.detail)
+    ) {
+      const branch = branchOf(last.detail);
+      const total = countOf(last.detail) + countOf(entry.detail);
+      last.detail = total > 0 ? `${branch} +${total}` : branch;
+    } else {
+      deduped.push({ ...entry });
+    }
+  }
+
+  feed = deduped.slice(0, 6);
+} catch {
+  feedError = true;
+}
+
 const languages = [
   { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg", tinted: true },
   { name: "Python", icon: "https://cdn.simpleicons.org/python/454138" },
@@ -126,6 +239,39 @@ const channels = [
         <li><span class="ts">[2025.08]</span> Started CS at Cal State Fullerton</li>
         <li><span class="ts">[2025.05]</span> Data science research at CIC|PCUBED, CSUF</li>
       </ul>
+    </CornerFrame>
+
+    <CornerFrame label="Live Feed">
+      <p class="feed-source">
+        &gt; source:
+        <a href="https://github.com/bhlonggul" target="_blank" rel="noopener noreferrer">
+          github.com/bhlonggul
+        </a>
+      </p>
+      {feedError ? (
+        <ul class="log feed">
+          <li class="feed-empty">&gt; feed unavailable</li>
+        </ul>
+      ) : feed.length === 0 ? (
+        <ul class="log feed">
+          <li class="feed-empty">&gt; no recent public activity</li>
+        </ul>
+      ) : (
+        <ul class="log feed" data-stagger>
+          {feed.map((f) => (
+            <li>
+              <span class="ts">[{f.date}]</span>
+              <span class="ev-body">
+                <span class="ev-type">{f.type}</span> ▸{" "}
+                <a href={f.href} target="_blank" rel="noopener noreferrer">
+                  {f.repoShort}
+                </a>{" "}
+                <span class="ev-meta">// {f.detail}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
     </CornerFrame>
   </section>
 
@@ -444,6 +590,45 @@ const channels = [
     color: var(--ink-soft);
     font-size: 0.85rem;
     min-width: 5.5rem;
+  }
+
+  .feed-source {
+    color: var(--ink-soft);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.6rem;
+  }
+
+  .feed-source a {
+    color: var(--ink-soft);
+    border-bottom: var(--line) dashed var(--ink-soft);
+  }
+
+  .feed .ts {
+    min-width: 7rem;
+  }
+
+  .feed .ev-body {
+    flex: 1 1 auto;
+    min-width: 0;
+    word-break: break-word;
+  }
+
+  .feed .ev-type {
+    color: var(--ink);
+    font-weight: bold;
+    letter-spacing: 0.08em;
+  }
+
+  .feed .ev-meta {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  .feed-empty {
+    color: var(--ink-soft);
+    font-style: italic;
+    border-bottom: none !important;
   }
 
   .skill-groups {
