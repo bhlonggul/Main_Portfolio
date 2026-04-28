@@ -1,24 +1,34 @@
 ---
 const items = [
-  { href: "#home", label: "Home", id: "home" },
-  { href: "#about", label: "About", id: "about" },
-  { href: "#projects", label: "Projects", id: "projects" },
-  { href: "#contact", label: "Contact", id: "contact" },
+  { href: "/#home", label: "Home", id: "home" },
+  { href: "/#about", label: "About", id: "about" },
+  { href: "/#projects", label: "Projects", id: "projects" },
+  { href: "/#contact", label: "Contact", id: "contact" },
 ];
+
+const path = Astro.url.pathname;
+const onProjectDetail = path.startsWith("/projects/");
 ---
 
 <header class="bar">
   <div class="bar-inner">
-    <a class="brand" href="#home">BHLONGGUL // SYS</a>
+    <a class="brand" href="/">BHLONGGUL // SYS</a>
     <nav>
       <ul>
-        {items.map((item) => (
-          <li>
-            <a href={item.href} data-section={item.id} class="item">
-              <span class="marker">▸</span>{item.label}
-            </a>
-          </li>
-        ))}
+        {items.map((item) => {
+          const staticActive = onProjectDetail && item.id === "projects";
+          return (
+            <li>
+              <a
+                href={item.href}
+                data-section={item.id}
+                class:list={["item", { active: staticActive }]}
+              >
+                <span class="marker">▸</span>{item.label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   </div>

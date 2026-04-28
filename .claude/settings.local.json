@@ -5,7 +5,24 @@
       "Bash(npm install *)",
       "mcp__claude_ai_Context7__query-docs",
       "mcp__claude_ai_Context7__resolve-library-id",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(curl -sL https://raw.githubusercontent.com/NGHades/TravelBookers/main/README.md)",
+      "Bash(curl -sL https://raw.githubusercontent.com/kuyakoy/fullyhacks_deepsea_game/main/README.md)",
+      "Bash(curl -sL https://raw.githubusercontent.com/kuyakoy/2025_Summer_Research/main/README.md)",
+      "Bash(curl -sL https://raw.githubusercontent.com/Ryu-134/cpsc335-sorting-algoithm-analyzer/main/README.md)",
+      "Bash(curl -s http://localhost:4321/projects/algorithm-visualizer)",
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(kill %1)",
+      "Bash(pkill -f \"astro\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/projects/algorithm-visualizer)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/projects/pomodori)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/projects/summer-research-2025)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/projects/travelbookers)",
+      "Bash(curl -s -o /dev/null -w '__TRACKED_VAR__: %{http_code}\\\\n' http://localhost:4321/projects/__TRACKED_VAR__)",
+      "Bash(curl -s -o /dev/null -w \"home: %{http_code}\\\\n\" \"http://localhost:4321/\")",
+      "Bash(pkill -f \"astro preview\")",
+      "Bash(pkill -f \"node.*preview\")",
+      "PowerShell(Get-NetTCPConnection *)"
     ]
   }
 }
