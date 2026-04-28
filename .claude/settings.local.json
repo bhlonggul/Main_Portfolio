@@ -26,7 +26,8 @@
       "Bash(curl -s -H \"Accept: application/vnd.github+json\" https://api.github.com/users/bhlonggul/events/public)",
       "Bash(python -c ' *)",
       "Bash(claude mcp *)",
-      "Bash(npm --version)"
+      "Bash(npm --version)",
+      "Bash(C:/Users/bhlon/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh *)"
     ]
   }
 }
