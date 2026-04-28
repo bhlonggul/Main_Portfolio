@@ -22,7 +22,11 @@
       "Bash(curl -s -o /dev/null -w \"home: %{http_code}\\\\n\" \"http://localhost:4321/\")",
       "Bash(pkill -f \"astro preview\")",
       "Bash(pkill -f \"node.*preview\")",
-      "PowerShell(Get-NetTCPConnection *)"
+      "PowerShell(Get-NetTCPConnection *)",
+      "Bash(curl -s -H \"Accept: application/vnd.github+json\" https://api.github.com/users/bhlonggul/events/public)",
+      "Bash(python -c ' *)",
+      "Bash(claude mcp *)",
+      "Bash(npm --version)"
     ]
   }
 }

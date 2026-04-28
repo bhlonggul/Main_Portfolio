@@ -47,7 +47,7 @@ The biggest lift. Turns the site from a portfolio *page* into a portfolio *proje
 Each is a small standalone feature. Add when you have content for it.
 
 - [ ] **4.1 `/now` page** — what you're currently learning/building/playing
-- [ ] **4.2 GitHub activity panel** — recent commits as a NieR system log on home page
+- [x] **4.2 GitHub activity panel** — build-time fetch of `https://api.github.com/users/bhlonggul/events/public` from `index.astro` frontmatter; filter to PushEvent / CreateEvent / PullRequestEvent (drops Watch/IssueComment/etc. noise); collapse consecutive PushEvents to the same repo+branch into a single line with summed +N count; render the top 6 entries as a NieR-style log (`[YYYY.MM.DD] TYPE ▸ repo // detail`) inside a new `Live Feed` `CornerFrame` in the hero, immediately below `Recent Activity`; repo name links to the repo on GitHub; small `> source: github.com/bhlonggul` caption at the top of the frame; graceful empty/error fallback (`> feed unavailable` or `> no recent public activity`) so the layout doesn't shift if the API request fails at build time; PushEvent detail uses the branch name (with optional `+N` commit count when GitHub provides it — merge-pushes from PRs no longer return `commits`/`size`)
 - [ ] **4.3 Skills loadout re-skin** — restyle skills grid as YoRHa unit equipment screen
 - [ ] **4.4 Devlog / blog** — second content collection at `src/content/posts/`; route at `src/pages/blog/[slug].astro`
 
