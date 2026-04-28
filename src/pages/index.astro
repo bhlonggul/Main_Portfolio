@@ -112,7 +112,7 @@ const channels = [
     </CornerFrame>
 
     <CornerFrame label="Recent Activity">
-      <ul class="log">
+      <ul class="log" data-stagger>
         <li><span class="ts">[2025.09]</span> Shipped Algorithm Visualizer (Pygame, 9 sorting algos)</li>
         <li><span class="ts">[2025.08]</span> Started CS at Cal State Fullerton</li>
         <li><span class="ts">[2025.05]</span> Data science research at CIC|PCUBED, CSUF</li>
@@ -165,7 +165,7 @@ const channels = [
       <div class="skill-groups">
         <div class="skill-group">
           <div class="skill-group-label">Languages</div>
-          <div class="skill-icons">
+          <div class="skill-icons" data-stagger>
             {languages.map((s) => (
               <div class="skill-icon">
                 <img src={s.icon} alt={s.name} class={s.tinted ? "ink-tinted" : ""} />
@@ -176,7 +176,7 @@ const channels = [
         </div>
         <div class="skill-group">
           <div class="skill-group-label">Tools &amp; Frameworks</div>
-          <div class="skill-icons">
+          <div class="skill-icons" data-stagger>
             {tools.map((s) => (
               <div class="skill-icon">
                 <img src={s.icon} alt={s.name} />
@@ -193,7 +193,7 @@ const channels = [
     <span class="label">Archive // Projects</span>
     <h2>Projects</h2>
 
-    <div class="grid">
+    <div class="grid" data-stagger>
       {projects.map((p) => (
         <CornerFrame label={p.title}>
           <div class="project-img">
@@ -222,7 +222,7 @@ const channels = [
     <h2>Open Channel</h2>
 
     <CornerFrame label="Established Links">
-      <dl class="channels">
+      <dl class="channels" data-stagger>
         {channels.map((c) => {
           const external = c.href.startsWith("http");
           return (

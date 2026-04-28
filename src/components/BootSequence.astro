@@ -5,16 +5,20 @@
 <div id="boot" aria-hidden="true">
   <div class="boot-stack">
     <div class="line big" id="boot-title" data-text="BHLONGGUL OS">BHLONGGUL OS</div>
-    <div class="line">> SYSTEM INITIALIZING<span class="dots"></span></div>
-    <div class="line dim">> CHECKSUM ... <span class="ok">OK</span></div>
-    <div class="line dim">> MEMORY ALLOC ... <span class="ok">OK</span></div>
-    <div class="line dim">> PERSONALITY DATA ... <span class="ok">OK</span></div>
-    <div class="line">> WELCOME, OPERATOR.</div>
+    <div class="line" style="animation-delay: 1100ms">> SYSTEM INITIALIZING<span class="dots"></span></div>
+    <div class="line dim" style="animation-delay: 1500ms">> BIOS v2.7.1 LOADED ............ <span class="ok">[OK]</span></div>
+    <div class="line dim" style="animation-delay: 1900ms">> CHECKSUM 0x4F2A8B ............. <span class="ok">[OK]</span></div>
+    <div class="line dim" style="animation-delay: 2300ms">> MEMORY ALLOC 0xFFE0 ........... <span class="ok">[OK]</span></div>
+    <div class="line dim" style="animation-delay: 2700ms" id="boot-neural">> NEURAL LINK ................... <span id="boot-neural-status" class="err">[ERR]</span></div>
+    <div class="line dim sub" style="animation-delay: 3100ms" id="boot-recover">&nbsp;&nbsp;>> RECONNECT // ALT NODE<span class="dots"></span></div>
+    <div class="line dim" style="animation-delay: 3900ms">> PERSONALITY DATA 0x9C1D ....... <span class="ok">[OK]</span></div>
+    <div class="line dim" style="animation-delay: 4300ms">> YORHA PROTOCOL v1.42 .......... <span class="ok">[OK]</span></div>
+    <div class="line" style="animation-delay: 4700ms">> WELCOME, OPERATOR.</div>
   </div>
 </div>
 
 <script>
-  const KEY = "boot:v2:played";
+  const KEY = "boot:v3:played";
   const el = document.getElementById("boot");
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -57,11 +61,25 @@
       requestAnimationFrame(tick);
     }
 
-    setTimeout(() => el.classList.add("fade"), 3800);
+    // Simulated error → recovery
+    setTimeout(() => {
+      const status = document.getElementById("boot-neural-status");
+      const recover = document.getElementById("boot-recover");
+      if (status) {
+        status.textContent = "[OK]";
+        status.classList.remove("err");
+        status.classList.add("ok");
+      }
+      if (recover) {
+        recover.classList.add("resolved");
+      }
+    }, 3800);
+
+    setTimeout(() => el.classList.add("fade"), 5500);
     setTimeout(() => {
       el.remove();
       document.body.classList.remove("boot-locked");
-    }, 4600);
+    }, 6200);
   }
 </script>
 
@@ -101,25 +119,6 @@
     animation: appear 180ms forwards;
   }
 
-  .line:nth-child(1) {
-    animation-delay: 0ms;
-  }
-  .line:nth-child(2) {
-    animation-delay: 1300ms;
-  }
-  .line:nth-child(3) {
-    animation-delay: 1800ms;
-  }
-  .line:nth-child(4) {
-    animation-delay: 2300ms;
-  }
-  .line:nth-child(5) {
-    animation-delay: 2800ms;
-  }
-  .line:nth-child(6) {
-    animation-delay: 3400ms;
-  }
-
   .big {
     font-family: "VT323", monospace;
     font-size: 2.6rem;
@@ -131,8 +130,22 @@
     color: rgba(196, 185, 152, 0.7);
   }
 
+  .sub {
+    font-size: 0.85em;
+    color: rgba(196, 185, 152, 0.55);
+    transition: opacity 400ms ease-out;
+  }
+
+  .sub.resolved {
+    opacity: 0;
+  }
+
   .ok {
     color: var(--accent);
+  }
+
+  .err {
+    color: var(--warn);
   }
 
   .dots::after {
