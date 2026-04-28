@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Claude Code local context (AI assistant memory; not for the repo)
+CLAUDE.md

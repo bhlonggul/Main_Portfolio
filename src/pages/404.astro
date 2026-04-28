@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CornerFrame from "../components/CornerFrame.astro";
+import GlitchText from "../components/GlitchText.astro";
+
+const pathname = Astro.url.pathname || "/unknown";
+---
+
+<BaseLayout
+  title="404 // Memory Corrupted"
+  description="Requested record could not be located."
+>
+  <section class="error-section">
+    <span class="label">Error // 404</span>
+    <GlitchText text="Memory Corrupted" as="h1" />
+
+    <p class="error-tagline">
+      The requested record could not be located. Data may have been
+      relocated, fragmented, or never indexed in the first place.
+    </p>
+
+    <CornerFrame label="System Log" elevated>
+      <pre class="error-log">
+&gt; ATTEMPT  : retrieve resource
+&gt; PATH     : {pathname}
+&gt; STATUS   : 404 // not_found
+&gt; INTEGRITY: corrupted
+&gt; SUGGEST  : return to main directory
+      </pre>
+      <a class="menu-link" href="/">[ Return to Main Menu ▸ ]</a>
+    </CornerFrame>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-section {
+    margin: 1rem 0 4rem;
+  }
+
+  .error-tagline {
+    color: var(--ink-soft);
+    max-width: 38rem;
+    margin: 1rem 0 2rem;
+  }
+
+  .error-log {
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink);
+    background: transparent;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .menu-link {
+    display: inline-block;
+    border: var(--line) solid var(--ink);
+    padding: 0.55rem 1rem;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    transition: background 120ms linear, color 120ms linear, letter-spacing 120ms linear;
+  }
+
+  .menu-link:hover,
+  .menu-link:focus-visible {
+    background: var(--ink);
+    color: var(--bg);
+    letter-spacing: 0.22em;
+  }
+</style>

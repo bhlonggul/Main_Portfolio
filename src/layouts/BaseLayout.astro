@@ -6,12 +6,18 @@ import BootSequence from "../components/BootSequence.astro";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
-  title = "Portfolio",
-  description = "Personal portfolio.",
+  title = "Brian Hlonggul // Portfolio",
+  description = "Brian Hlonggul — CS undergrad at Cal State Fullerton. Tools, algorithms, small games.",
+  image = "/og-image.png",
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("/", Astro.url);
+const canonical = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImage = new URL(image, siteUrl).toString();
 ---
 
 <html lang="en">
@@ -22,7 +28,20 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Brian Hlonggul // Portfolio" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body>
     <BootSequence />
@@ -36,6 +55,11 @@ const {
         <span>{new Date().getFullYear()}</span>
       </div>
     </footer>
+
+    <script>
+      import { inject } from "@vercel/analytics";
+      inject();
+    </script>
 
     <style>
       .foot {
