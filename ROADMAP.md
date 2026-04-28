@@ -23,12 +23,12 @@ Small, high-value items. Each is 30 min – 2 hours.
 
 Pure visual identity. Pick the ones that excite you most; none are mandatory. **SFX explicitly excluded.**
 
-- [ ] **2.1 POD 042 companion** — small drone bottom-right with contextual flavor text per section
-- [ ] **2.2 Section "load" transitions** — IntersectionObserver-driven type-on / staggered fade for section content
-- [ ] **2.3 Custom cursor** — crosshair / corner-bracket reticle; honor reduced-motion
-- [ ] **2.4 Boot sequence depth** — more log lines, fake checksums, simulated error that auto-resolves
-- [ ] **2.5 Cycling lore footer** — random NieR-style status string in footer per page load
-- [ ] **2.6 Konami code → glitch mode** — ↑↑↓↓←→←→BA toggles heavier scanlines + RGB shift; persists in localStorage
+- [x] **2.1 POD 042 companion** — bracket-framed bubble bottom-right with section-aware flavor text; click − to minimize, click `[ ◆ POD ]` tab to expand; persists across navigation via sessionStorage
+- [x] **2.2 Section "load" transitions** — generic `[data-stagger]` mechanism in global.css; IntersectionObserver in BaseLayout adds `.revealed` when container enters viewport; applied to activity log, both skill grids, projects grid, contact channels
+- [x] **2.3 Custom cursor** — `public/cursor.svg` (crosshair) for default + `public/cursor-pointer.svg` (corner-bracket reticle) over interactive elements; CSS-keyword fallbacks (`crosshair`, `pointer`); text-input I-beam preserved for form fields
+- [x] **2.4 Boot sequence depth** — extended `BootSequence.astro` with BIOS line, hex checksums, neural-link simulated error w/ recovery, YoRHa protocol line; total runtime ~6.2s; new `--warn` token added to `global.css` for the error state
+- [x] **2.5 Cycling lore footer** — 15-string lore array in `BaseLayout.astro`; server picks initial value, client script picks a fresh one on every page load; centered between `// END OF TRANSMISSION` and the year, stacks below on narrow screens
+- [x] **2.6 Konami code → glitch mode** — keydown listener in `BaseLayout.astro` watches for ↑↑↓↓←→←→BA; toggles `body.glitch-mode` (heavier scanlines w/ rolling animation + warn/green RGB-shift text-shadow, all in `global.css`); state persists in `localStorage` under `glitch:mode`; `#glitch-toast` confirms ON/OFF for 1.5s; ignores keystrokes inside inputs/textareas/contenteditable
 
 ---
 

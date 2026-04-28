@@ -1,0 +1,203 @@
+---
+const messages: Record<string, string> = {
+  home: "Welcome, operator. Standing by.",
+  about: "Reading subject data. Designation: Brian.",
+  projects: "Archive accessed. Four records on file.",
+  contact: "Channel stable. Transmission ready.",
+  error: "Searching... record not found.",
+};
+const fallback = "Awaiting input.";
+---
+
+<aside id="pod" aria-label="POD 042 companion">
+  <div class="pod-bubble">
+    <span class="bracket tl"></span>
+    <span class="bracket tr"></span>
+    <span class="bracket bl"></span>
+    <span class="bracket br"></span>
+    <span class="pod-label">POD 042</span>
+    <p class="pod-message" id="pod-message">{fallback}</p>
+    <button class="pod-min" id="pod-min" type="button" aria-label="Minimize POD 042">
+      &minus;
+    </button>
+  </div>
+  <button
+    class="pod-handle"
+    id="pod-handle"
+    type="button"
+    aria-label="Expand POD 042"
+  >
+    <span class="pod-handle-icon">◆</span>
+    <span class="pod-handle-label">POD</span>
+  </button>
+</aside>
+
+<script define:vars={{ messages, fallback }}>
+  const pod = document.getElementById("pod");
+  const messageEl = document.getElementById("pod-message");
+  const minBtn = document.getElementById("pod-min");
+  const handleBtn = document.getElementById("pod-handle");
+  if (pod && messageEl && minBtn && handleBtn) {
+    const KEY = "pod:minimized";
+    if (sessionStorage.getItem(KEY) === "1") {
+      pod.classList.add("minimized");
+    }
+
+    minBtn.addEventListener("click", () => {
+      pod.classList.add("minimized");
+      sessionStorage.setItem(KEY, "1");
+    });
+
+    handleBtn.addEventListener("click", () => {
+      pod.classList.remove("minimized");
+      sessionStorage.removeItem(KEY);
+    });
+
+    const sections = document.querySelectorAll("section[id]");
+    if (sections.length > 0) {
+      const setMessage = (id) => {
+        messageEl.textContent = messages[id] || fallback;
+      };
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort(
+              (a, b) =>
+                a.boundingClientRect.top - b.boundingClientRect.top
+            );
+          if (visible[0]) setMessage(visible[0].target.id);
+        },
+        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      );
+      sections.forEach((s) => observer.observe(s));
+    }
+  }
+</script>
+
+<style>
+  #pod {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 50;
+    font-family: "Share Tech Mono", monospace;
+    pointer-events: none;
+  }
+
+  .pod-bubble,
+  .pod-handle {
+    pointer-events: auto;
+  }
+
+  .pod-bubble {
+    position: relative;
+    background: var(--bg);
+    border: var(--line) solid var(--frame-color);
+    padding: 0.75rem 0.9rem 0.75rem 0.9rem;
+    max-width: 17rem;
+    color: var(--ink);
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .pod-bubble .bracket {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 0 solid var(--frame-color);
+    background: var(--bg);
+  }
+  .pod-bubble .tl { top: -3px; left: -3px; border-top-width: 3px; border-left-width: 3px; }
+  .pod-bubble .tr { top: -3px; right: -3px; border-top-width: 3px; border-right-width: 3px; }
+  .pod-bubble .bl { bottom: -3px; left: -3px; border-bottom-width: 3px; border-left-width: 3px; }
+  .pod-bubble .br { bottom: -3px; right: -3px; border-bottom-width: 3px; border-right-width: 3px; }
+
+  .pod-label {
+    position: absolute;
+    top: -0.6rem;
+    left: 0.7rem;
+    background: var(--bg);
+    padding: 0 0.4rem;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--frame-color);
+  }
+
+  .pod-message {
+    margin: 0;
+    padding-right: 1.4rem;
+  }
+
+  .pod-min {
+    position: absolute;
+    top: -0.4rem;
+    right: -0.4rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    background: var(--bg);
+    border: var(--line) solid var(--frame-color);
+    color: var(--ink);
+    font-family: "Share Tech Mono", monospace;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    transition: background 120ms linear, color 120ms linear;
+  }
+
+  .pod-min:hover,
+  .pod-min:focus-visible {
+    background: var(--ink);
+    color: var(--bg);
+    outline: none;
+  }
+
+  .pod-handle {
+    display: none;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--bg);
+    border: var(--line) solid var(--frame-color);
+    color: var(--ink);
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    padding: 0.45rem 0.75rem;
+    cursor: pointer;
+    transition: background 120ms linear, color 120ms linear;
+  }
+
+  .pod-handle:hover,
+  .pod-handle:focus-visible {
+    background: var(--ink);
+    color: var(--bg);
+    outline: none;
+  }
+
+  .pod-handle-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+
+  #pod.minimized .pod-bubble {
+    display: none;
+  }
+
+  #pod.minimized .pod-handle {
+    display: inline-flex;
+  }
+
+  @media (max-width: 520px) {
+    #pod {
+      bottom: 0.75rem;
+      right: 0.75rem;
+    }
+    .pod-bubble {
+      max-width: 13rem;
+      font-size: 0.75rem;
+    }
+  }
+</style>
