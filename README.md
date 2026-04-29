@@ -1,7 +1,7 @@
 # Main_Portfolio
 
 Personal portfolio site for **Brian Hlonggul** — CS undergrad at Cal State Fullerton.
-NieR: Automata-inspired terminal aesthetic. Static site, single page with anchor-scrolled sections plus per-project case study pages.
+Static site, single page with anchor-scrolled sections plus per-project case study pages.
 
 🌐 Live: [bhlonggul.vercel.app](https://bhlonggul.vercel.app)
 
