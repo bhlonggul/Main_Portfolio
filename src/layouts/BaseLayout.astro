@@ -3,22 +3,33 @@ import "../styles/global.css";
 import MenuNav from "../components/MenuNav.astro";
 import BootSequence from "../components/BootSequence.astro";
 import Pod042 from "../components/Pod042.astro";
+import { PERSON_JSONLD, jsonLdScript } from "../lib/seo";
+
+type JsonLd = Record<string, unknown>;
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  structuredData?: JsonLd | JsonLd[];
 }
 
 const {
   title = "Brian Hlonggul // Portfolio",
   description = "Brian Hlonggul — CS undergrad at Cal State Fullerton. Tools, algorithms, small games.",
   image = "/og-image.png",
+  structuredData,
 } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL("/", Astro.url);
 const canonical = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImage = new URL(image, siteUrl).toString();
+
+const extraJsonLd: JsonLd[] = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
 
 const lore = [
   "ROUTINE 042 // PATROL OK",
@@ -62,6 +73,11 @@ const initialLore = lore[Math.floor(Math.random() * lore.length)];
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <script is:inline type="application/ld+json" set:html={jsonLdScript(PERSON_JSONLD)} />
+    {extraJsonLd.map((data) => (
+      <script is:inline type="application/ld+json" set:html={jsonLdScript(data)} />
+    ))}
   </head>
   <body>
     <BootSequence />
@@ -84,7 +100,8 @@ const initialLore = lore[Math.floor(Math.random() * lore.length)];
 
     <script>
       import { inject } from "@vercel/analytics";
-      inject();
+      const host = window.location.hostname;
+      if (host !== "localhost" && host !== "127.0.0.1") inject();
     </script>
 
     <script>
@@ -197,7 +214,7 @@ const initialLore = lore[Math.floor(Math.random() * lore.length)];
         font-size: 0.78rem;
         text-transform: uppercase;
         letter-spacing: 0.18em;
-        color: var(--ink-soft);
+        color: var(--ink);
       }
 
       .foot-side {

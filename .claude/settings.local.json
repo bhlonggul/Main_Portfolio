@@ -27,7 +27,25 @@
       "Bash(python -c ' *)",
       "Bash(claude mcp *)",
       "Bash(npm --version)",
-      "Bash(C:/Users/bhlon/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh *)"
+      "Bash(C:/Users/bhlon/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh *)",
+      "Bash(git *)",
+      "PowerShell(npm install *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(winget install *)",
+      "Bash(tasklist)",
+      "Bash(\"C:/Program Files/nodejs/node.exe\" --version)",
+      "Bash(\"C:/Program Files/nodejs/npm.cmd\" --version)",
+      "Bash(\"C:/Program Files/nodejs/npm.cmd\" install)",
+      "PowerShell(Remove-Item *)",
+      "Bash('C:/Program Files/nodejs/npm.cmd' install)",
+      "Bash('C:/Program Files/nodejs/npm.cmd' run check)",
+      "Bash('C:/Program Files/nodejs/npm.cmd' run build)",
+      "Bash(grep *)",
+      "Bash('C:/Program Files/nodejs/npm.cmd' run preview)",
+      "Bash('C:/Program Files/nodejs/npx.cmd' --yes @lhci/cli@0.14.x autorun)",
+      "Bash('C:/Program Files/nodejs/npx.cmd' --yes lighthouse@12 http://localhost:4321/ --output=json --output-path=./lh-home.json --quiet '--chrome-flags=--headless=new --no-sandbox' --only-categories=performance,accessibility,best-practices,seo --form-factor=desktop --screenEmulation.mobile=false --throttling.cpuSlowdownMultiplier=1)",
+      "Bash('C:/Program Files/nodejs/node.exe' -e 'const r=require\\('\\\\''./lh-home-desktop.json'\\\\''\\);const s=r.categories;console.log\\('\\\\''=== HOME \\(Desktop\\) ==='\\\\''\\);for\\(const k of Object.keys\\(s\\)\\){console.log\\(k.padEnd\\(20\\),\\(s[k].score*100\\).toFixed\\(0\\)\\);}')",
+      "Bash('C:/Program Files/nodejs/node.exe' -e ' *)"
     ]
   }
 }
