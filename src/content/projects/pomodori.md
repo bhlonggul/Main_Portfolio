@@ -6,7 +6,6 @@ image: "../../assets/projects/pomodori.png"
 repo: "https://github.com/kuyakoy/fullyhacks_deepsea_game"
 demo: "https://markerses.itch.io/domodori"
 date: 2026-04-19
-order: 2
 ---
 
 ## Problem

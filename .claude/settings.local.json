@@ -52,7 +52,9 @@
       "Bash(npx --yes @lhci/cli@0.14.x autorun)",
       "WebFetch(domain:storage.googleapis.com)",
       "Bash(node *)",
-      "Bash(echo \"Exit: $?\")"
+      "Bash(echo \"Exit: $?\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:nodebud.vercel.app)"
     ]
   }
 }

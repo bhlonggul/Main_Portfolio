@@ -351,9 +351,10 @@ const channels = [
             <Image
               src={p.data.image}
               alt={p.data.title}
-              widths={[320, 640]}
+              widths={[240, 480]}
               sizes="(max-width: 600px) calc(100vw - 3rem), 427px"
               loading="lazy"
+              quality={72}
             />
             <div class="project-img-scan"></div>
           </div>

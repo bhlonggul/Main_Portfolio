@@ -5,7 +5,6 @@ tags: ["python", "research", "data"]
 image: "../../assets/projects/research.png"
 repo: "https://github.com/kuyakoy/2025_Summer_Research"
 date: 2025-08-01
-order: 4
 ---
 
 ## Problem
