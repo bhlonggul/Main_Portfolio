@@ -45,7 +45,14 @@
       "Bash('C:/Program Files/nodejs/npx.cmd' --yes @lhci/cli@0.14.x autorun)",
       "Bash('C:/Program Files/nodejs/npx.cmd' --yes lighthouse@12 http://localhost:4321/ --output=json --output-path=./lh-home.json --quiet '--chrome-flags=--headless=new --no-sandbox' --only-categories=performance,accessibility,best-practices,seo --form-factor=desktop --screenEmulation.mobile=false --throttling.cpuSlowdownMultiplier=1)",
       "Bash('C:/Program Files/nodejs/node.exe' -e 'const r=require\\('\\\\''./lh-home-desktop.json'\\\\''\\);const s=r.categories;console.log\\('\\\\''=== HOME \\(Desktop\\) ==='\\\\''\\);for\\(const k of Object.keys\\(s\\)\\){console.log\\(k.padEnd\\(20\\),\\(s[k].score*100\\).toFixed\\(0\\)\\);}')",
-      "Bash('C:/Program Files/nodejs/node.exe' -e ' *)"
+      "Bash('C:/Program Files/nodejs/node.exe' -e ' *)",
+      "Bash(gh run *)",
+      "PowerShell(gh run *)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(npx --yes @lhci/cli@0.14.x autorun)",
+      "WebFetch(domain:storage.googleapis.com)",
+      "Bash(node *)",
+      "Bash(echo \"Exit: $?\")"
     ]
   }
 }
