@@ -54,12 +54,17 @@ Each is a small standalone feature. Add when you have content for it.
 
 ---
 
-## Suggested weekly cadence
+## Round 2 — SEO depth & engineering rigor
 
-- **Week 1:** Finish Phase 1 entirely
-- **Week 2:** Phase 3.1 alone (biggest content lift)
-- **Week 3:** 2–3 Phase 2 favorites
-- **Week 4+:** Phase 3.2, 3.3, then Phase 4 as content piles up
+Focused (~1 day) round after the original phases shipped. Goals: better discoverability when recruiters Google "Brian Hlonggul" and a measurable quality bar that doesn't regress on every commit.
+
+- [x] **R2.1 JSON-LD structured data** — new `src/lib/seo.ts` exports a `PERSON_JSONLD` constant (with `@id` anchor for cross-reference) and a `jsonLdScript()` helper that escapes `<` to prevent `</script>` injection; `BaseLayout.astro` emits the Person schema on every page and accepts an optional `structuredData` prop; project pages (`[slug].astro`) build a `SoftwareSourceCode` schema (name, description, codeRepository, programmingLanguage, dateCreated, url) that references the Person via `@id`. Validates clean on schema.org validator + Google Rich Results Test.
+- [x] **R2.2 Lighthouse audit + fixes** — first pass surfaced color contrast (`--ink-soft` text 3.01:1) and a Vercel Analytics 404 on localhost. Retuned `--ink-soft #6a6453 → #4d483a` (4.71:1 vs `--bg`) and `--bg-deep #b3a684 → #bcb08f` (4.86:1 vs `--ink`); switched `.foot-inner`, `.resume-intro`, `.resume-meta`, `.back a` from `--ink-soft` to `--ink` so muted text never lands on the deeper background. Added `min-height: 24px` + small padding on `.social-bar a` for mobile tap targets. Replaced build-time `import.meta.env.PROD` gate with a runtime hostname check (`localhost`/`127.0.0.1` skipped) so Vercel Analytics no longer 404s in preview. Final scores: Home/Project/404 Desktop = **100/100/100/100**, Home Mobile = **99/100/100/100**.
+- [x] **R2.3 CI quality gates** — added `check` script + `@astrojs/check` and `typescript` devDeps; new `.github/workflows/ci.yml` with two jobs (`check` runs `astro check` + build, `lighthouse` runs LHCI autorun and depends on check); new `lighthouserc.json` with thresholds perf ≥0.9, a11y ≥0.95, SEO ≥0.95, 3 runs averaged, `temporary-public-storage` upload.
+
+**Deferred to a future round (not cancelled):** HTML `/resume` page, per-project OG images, dedicated axe-core a11y audit, link checker in CI, deeper case-study content.
+
+---
 
 ## How to verify after each phase
 
@@ -72,4 +77,4 @@ Each is a small standalone feature. Add when you have content for it.
 
 ---
 
-*Full design rationale lives in the plan file at `~/.claude/plans/idk-where-my-claude-md-reactive-peacock.md` (not in repo). This file is the working tracker.*
+*Full design rationale for the original phases lives at `~/.claude/plans/idk-where-my-claude-md-reactive-peacock.md`; the Round 2 spec lives at `~/.claude/plans/we-have-completed-the-zippy-mitten.md` (both outside the repo). This file is the working tracker.*

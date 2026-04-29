@@ -4,6 +4,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CornerFrame from "../../components/CornerFrame.astro";
 import GlitchText from "../../components/GlitchText.astro";
+import { PERSON_ID } from "../../lib/seo";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -16,11 +17,25 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 const { title, summary, tags, image, repo, demo } = project.data;
+
+const projectJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": title,
+  "description": summary,
+  "codeRepository": repo,
+  "programmingLanguage": tags,
+  "dateCreated": project.data.date.toISOString().slice(0, 10),
+  "url": new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(),
+  "author": { "@id": PERSON_ID },
+  ...(demo ? { "sameAs": [demo] } : {}),
+};
 ---
 
 <BaseLayout
   title={`${title} // Brian Hlonggul`}
   description={summary}
+  structuredData={projectJsonLd}
 >
   <article class="case-study">
     <header class="case-head">
@@ -216,7 +231,7 @@ const { title, summary, tags, image, repo, demo } = project.data;
   .back a {
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: var(--ink-soft);
+    color: var(--ink);
     border-bottom: none;
   }
 
