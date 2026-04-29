@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Claude Code local context (AI assistant memory; not for the repo)
 CLAUDE.md
+
+# Superpowers brainstorming session files
+.superpowers/
