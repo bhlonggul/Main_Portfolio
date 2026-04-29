@@ -48,7 +48,13 @@ const projectJsonLd = {
     </header>
 
     <div class="hero">
-      <Image src={image} alt={title} width={1280} loading="eager" />
+      <Image
+        src={image}
+        alt={title}
+        widths={[480, 832, 1280]}
+        sizes="(max-width: 920px) calc(100vw - 3rem), 832px"
+        loading="eager"
+      />
       <div class="hero-scan"></div>
     </div>
 

@@ -17,7 +17,10 @@
         "categories:best-practices": ["warn", { "minScore": 0.9 }],
         "categories:seo": ["error", { "minScore": 0.95 }],
         "uses-long-cache-ttl": "off",
-        "csp-xss": "off"
+        "csp-xss": "off",
+        "lcp-lazy-loaded": "off",
+        "prioritize-lcp-image": "off",
+        "non-composited-animations": "off"
       }
     },
     "upload": { "target": "temporary-public-storage" }

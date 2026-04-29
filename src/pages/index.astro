@@ -348,7 +348,13 @@ const channels = [
       {projects.map((p) => (
         <CornerFrame label={p.data.title}>
           <div class="project-img">
-            <Image src={p.data.image} alt={p.data.title} width={640} loading="lazy" />
+            <Image
+              src={p.data.image}
+              alt={p.data.title}
+              widths={[320, 640]}
+              sizes="(max-width: 600px) calc(100vw - 3rem), 427px"
+              loading="lazy"
+            />
             <div class="project-img-scan"></div>
           </div>
           <h3>

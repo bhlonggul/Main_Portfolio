@@ -115,8 +115,8 @@
   }
 
   .line {
-    opacity: 0;
-    animation: appear 180ms forwards;
+    visibility: hidden;
+    animation: appear 1ms forwards;
   }
 
   .big {
@@ -127,17 +127,16 @@
   }
 
   .dim {
-    color: rgba(196, 185, 152, 0.7);
+    color: rgba(196, 185, 152, 0.95);
   }
 
   .sub {
     font-size: 0.85em;
-    color: rgba(196, 185, 152, 0.55);
-    transition: opacity 400ms ease-out;
+    color: rgba(196, 185, 152, 0.95);
   }
 
   .sub.resolved {
-    opacity: 0;
+    visibility: hidden;
   }
 
   .ok {
@@ -158,7 +157,7 @@
 
   @keyframes appear {
     to {
-      opacity: 1;
+      visibility: visible;
     }
   }
 
