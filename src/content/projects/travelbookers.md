@@ -5,7 +5,6 @@ tags: ["react", "javascript", "web", "collab"]
 image: "../../assets/projects/travelbookers.png"
 repo: "https://github.com/NGHades/TravelBookers"
 date: 2025-05-15
-order: 3
 ---
 
 ## Problem

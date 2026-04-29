@@ -5,7 +5,6 @@ tags: ["python", "pygame", "algorithms"]
 image: "../../assets/projects/algo-viz.png"
 repo: "https://github.com/Ryu-134/cpsc335-sorting-algoithm-analyzer"
 date: 2025-09-01
-order: 1
 ---
 
 ## Problem
