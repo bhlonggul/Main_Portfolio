@@ -5,15 +5,15 @@
 <div id="boot" aria-hidden="true">
   <div class="boot-stack">
     <div class="line big" id="boot-title" data-text="BHLONGGUL OS">BHLONGGUL OS</div>
-    <div class="line" style="animation-delay: 1100ms">> SYSTEM INITIALIZING<span class="dots"></span></div>
-    <div class="line dim" style="animation-delay: 1500ms">> BIOS v2.7.1 LOADED ............ <span class="ok">[OK]</span></div>
-    <div class="line dim" style="animation-delay: 1900ms">> CHECKSUM 0x4F2A8B ............. <span class="ok">[OK]</span></div>
-    <div class="line dim" style="animation-delay: 2300ms">> MEMORY ALLOC 0xFFE0 ........... <span class="ok">[OK]</span></div>
-    <div class="line dim" style="animation-delay: 2700ms" id="boot-neural">> NEURAL LINK ................... <span id="boot-neural-status" class="err">[ERR]</span></div>
-    <div class="line dim sub" style="animation-delay: 3100ms" id="boot-recover">&nbsp;&nbsp;>> RECONNECT // ALT NODE<span class="dots"></span></div>
-    <div class="line dim" style="animation-delay: 3900ms">> PERSONALITY DATA 0x9C1D ....... <span class="ok">[OK]</span></div>
-    <div class="line dim" style="animation-delay: 4300ms">> YORHA PROTOCOL v1.42 .......... <span class="ok">[OK]</span></div>
-    <div class="line" style="animation-delay: 4700ms">> WELCOME, OPERATOR.</div>
+    <div class="line" style="animation-delay: 900ms">> SYSTEM INITIALIZING<span class="dots"></span></div>
+    <div class="line dim" style="animation-delay: 1200ms">> BIOS v2.7.1 LOADED ............ <span class="ok">[OK]</span></div>
+    <div class="line dim" style="animation-delay: 1500ms">> CHECKSUM 0x4F2A8B ............. <span class="ok">[OK]</span></div>
+    <div class="line dim" style="animation-delay: 1800ms">> MEMORY ALLOC 0xFFE0 ........... <span class="ok">[OK]</span></div>
+    <div class="line dim" style="animation-delay: 2100ms" id="boot-neural">> NEURAL LINK ................... <span id="boot-neural-status" class="err">[ERR]</span></div>
+    <div class="line dim sub" style="animation-delay: 2400ms" id="boot-recover">&nbsp;&nbsp;>> RECONNECT // ALT NODE<span class="dots"></span></div>
+    <div class="line dim" style="animation-delay: 3000ms">> PERSONALITY DATA 0x9C1D ....... <span class="ok">[OK]</span></div>
+    <div class="line dim" style="animation-delay: 3300ms">> YORHA PROTOCOL v1.42 .......... <span class="ok">[OK]</span></div>
+    <div class="line" style="animation-delay: 3600ms">> WELCOME, OPERATOR.</div>
   </div>
 </div>
 
@@ -35,7 +35,7 @@
     if (title) {
       const target = title.dataset.text ?? title.textContent ?? "";
       const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?#@*+=";
-      const DURATION = 1400;
+      const DURATION = 1100;
       const FRAME = 55;
       const start = performance.now();
 
@@ -73,13 +73,13 @@
       if (recover) {
         recover.classList.add("resolved");
       }
-    }, 3800);
+    }, 2900);
 
-    setTimeout(() => el.classList.add("fade"), 5500);
+    setTimeout(() => el.classList.add("fade"), 4300);
     setTimeout(() => {
       el.remove();
       document.body.classList.remove("boot-locked");
-    }, 6200);
+    }, 4900);
   }
 </script>
 

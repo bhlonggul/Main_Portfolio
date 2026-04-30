@@ -56,7 +56,9 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:nodebud.vercel.app)",
       "Bash(curl -s -H \"Accept: application/vnd.github+json\" \"https://api.github.com/users/bhlonggul/events/public\")",
-      "Bash(python -c \"import sys, json; data = json.load\\(sys.stdin\\); print\\('Total events:', len\\(data\\)\\); [print\\(f\\\\\"  {e['created_at']}  {e['type']:20s}  {e['repo']['name']}\\\\\"\\) for e in data[:10]]\")"
+      "Bash(python -c \"import sys, json; data = json.load\\(sys.stdin\\); print\\('Total events:', len\\(data\\)\\); [print\\(f\\\\\"  {e['created_at']}  {e['type']:20s}  {e['repo']['name']}\\\\\"\\) for e in data[:10]]\")",
+      "Bash(identify C:/Users/bhlon/Documents/GitHub/Main_Portfolio/src/assets/brian.jpg)",
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('C:/Users/bhlon/Documents/GitHub/Main_Portfolio/src/assets/brian.jpg'\\); print\\(img.size\\)\")"
     ]
   }
 }
