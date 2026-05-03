@@ -58,7 +58,11 @@
       "Bash(curl -s -H \"Accept: application/vnd.github+json\" \"https://api.github.com/users/bhlonggul/events/public\")",
       "Bash(python -c \"import sys, json; data = json.load\\(sys.stdin\\); print\\('Total events:', len\\(data\\)\\); [print\\(f\\\\\"  {e['created_at']}  {e['type']:20s}  {e['repo']['name']}\\\\\"\\) for e in data[:10]]\")",
       "Bash(identify C:/Users/bhlon/Documents/GitHub/Main_Portfolio/src/assets/brian.jpg)",
-      "Bash(python -c \"from PIL import Image; img = Image.open\\('C:/Users/bhlon/Documents/GitHub/Main_Portfolio/src/assets/brian.jpg'\\); print\\(img.size\\)\")"
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('C:/Users/bhlon/Documents/GitHub/Main_Portfolio/src/assets/brian.jpg'\\); print\\(img.size\\)\")",
+      "WebFetch(domain:api.iconify.design)",
+      "Bash(curl -sI \"https://api.iconify.design/simple-icons/csharp.svg?color=%23454138\")",
+      "Bash(curl -sI \"https://api.iconify.design/simple-icons/visualstudiocode.svg?color=%23454138\")",
+      "Bash(curl -s \"https://api.iconify.design/simple-icons/csharp.svg?color=%23454138\")"
     ]
   }
 }
