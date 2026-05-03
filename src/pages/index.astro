@@ -134,18 +134,32 @@ const languages = [
   { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg", tinted: true },
   { name: "Python", icon: "https://cdn.simpleicons.org/python/454138" },
   { name: "C++", icon: "https://cdn.simpleicons.org/cplusplus/454138" },
-  { name: "Assembly", icon: "https://cdn.simpleicons.org/assemblyscript/454138" },
+  { name: "C#", icon: "https://api.iconify.design/simple-icons/csharp.svg?color=%23454138" },
+  { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript/454138" },
+  { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript/454138" },
   { name: "HTML", icon: "https://cdn.simpleicons.org/html5/454138" },
   { name: "CSS", icon: "https://cdn.simpleicons.org/css/454138" },
-  { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript/454138" },
+];
+
+const frameworks = [
+  { name: "React", icon: "https://cdn.simpleicons.org/react/454138" },
+  { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/454138" },
+  { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/454138" },
+  { name: "Express", icon: "https://cdn.simpleicons.org/express/454138" },
+  { name: "Unity", icon: "https://cdn.simpleicons.org/unity/454138" },
+  { name: "Pandas", icon: "https://cdn.simpleicons.org/pandas/454138" },
+  { name: "NumPy", icon: "https://cdn.simpleicons.org/numpy/454138" },
+  { name: "scikit-learn", icon: "https://cdn.simpleicons.org/scikitlearn/454138" },
 ];
 
 const tools = [
   { name: "Git", icon: "https://cdn.simpleicons.org/git/454138" },
   { name: "GitHub", icon: "https://cdn.simpleicons.org/github/454138" },
-  { name: "Unity", icon: "https://cdn.simpleicons.org/unity/454138" },
-  { name: "Arduino", icon: "https://cdn.simpleicons.org/arduino/454138" },
+  { name: "VS Code", icon: "https://api.iconify.design/simple-icons/visualstudiocode.svg?color=%23454138" },
+  { name: "Vite", icon: "https://cdn.simpleicons.org/vite/454138" },
   { name: "Jupyter", icon: "https://cdn.simpleicons.org/jupyter/454138" },
+  { name: "Arduino", icon: "https://cdn.simpleicons.org/arduino/454138" },
+  { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql/454138" },
 ];
 
 const channels = [
@@ -277,21 +291,25 @@ const channels = [
 
     <CornerFrame label="Bio">
       <p>
-        Hi — I'm <strong>Brian</strong>. I'm a Computer Science undergrad at
-        <strong>Cal State Fullerton</strong>, transferred in from Mt. San
-        Antonio College. I write mostly Python, Java, and C++, and lately I've
-        been spending more time on visualizers, small games, and anything that
-        lets me see an algorithm move.
+        Hi — I'm <strong>Brian</strong>, a Computer Science undergrad at
+        <strong>Cal State Fullerton</strong>. Most of my work lately is
+        full-stack web with some AI integration mixed in, and I'm drawn to
+        projects that solve interesting problems.
       </p>
       <p>
-        In summer 2025 I worked as a student data science researcher at
-        <strong>CIC|PCUBED</strong>, looking at correlations between digital
-        behavior and mental health using Pandas and NumPy. Off the keyboard
-        I'm an officer for <strong>ACM Node Buds</strong> at CSUF, helping
-        organize workshops and mentorship for other CS students.
+        At BroncoHacks 2026 I built <strong>NodeBud</strong>, a mock-interview
+        app that uses computer vision to give candidates real-time behavioral
+        feedback — posture, eye contact, attentiveness. Before that I worked
+        as a student data science researcher at <strong>CIC|PCUBED</strong>,
+        building Pandas/NumPy/scikit-learn pipelines to study correlations
+        between digital behavior and mental health.
       </p>
       <p class="mb-0">
-        If something here looks interesting, I'd love to hear from you.
+        Off the keyboard I'm an officer for <strong>ACM Node Buds</strong> at
+        CSUF, where I help run weekly events and the big-little mentorship
+        program for the CS community. I'm always open to internships,
+        collaboration, or just good conversation — if something here looks
+        interesting, I'd love to hear from you.
       </p>
     </CornerFrame>
 
@@ -326,7 +344,18 @@ const channels = [
           </div>
         </div>
         <div class="skill-group">
-          <div class="skill-group-label">Tools &amp; Frameworks</div>
+          <div class="skill-group-label">Frameworks &amp; Libraries</div>
+          <div class="skill-icons" data-stagger>
+            {frameworks.map((s) => (
+              <div class="skill-icon">
+                <img src={s.icon} alt={s.name} />
+                <span>{s.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Developer Tools</div>
           <div class="skill-icons" data-stagger>
             {tools.map((s) => (
               <div class="skill-icon">
